@@ -112,7 +112,7 @@ public class FlutterHyperpayPlugin implements MethodCallHandler, PluginRegistry.
     else if (call.method.equals("checkoutActivity")) {
       this.result = result;
       String checkoutID = call.argument("checkoutID");
-      String languageCode = call.argument("languageCode");
+      String languageCode = call.argument("languageCodeAndroid");
       String callbackURL = call.argument("callbackURL");
       callbackScheme = callbackURL;
       openCheckoutUI(checkoutID, languageCode);
@@ -131,18 +131,18 @@ public class FlutterHyperpayPlugin implements MethodCallHandler, PluginRegistry.
           resourcePath = data.getStringExtra(
                   CheckoutActivity.CHECKOUT_RESULT_RESOURCE_PATH);
           if (transaction.getTransactionType() == TransactionType.SYNC) {
-              result.success("201");
+              result.success("HP_SYNC_COMPLETED");
           } else {
-              result.success("200");
+              result.success("HP_ASYNC_COMPLETED");
           }
           break;
         case CheckoutActivity.RESULT_CANCELED:
-            result.success("403");
+            result.success("HP_CANCELLED");
           break;
         case CheckoutActivity.RESULT_ERROR:
           PaymentError payError = data.getParcelableExtra(
                   CheckoutActivity.CHECKOUT_RESULT_ERROR);
-                  result.error("400", payError.getErrorMessage(), payError.getErrorInfo());
+                  result.error("HP_ERROR", payError.getErrorMessage(), payError.getErrorInfo());
       }
     }
 
@@ -152,6 +152,7 @@ public class FlutterHyperpayPlugin implements MethodCallHandler, PluginRegistry.
   private void openCheckoutUI(String checkoutId, String languageCode) {
     CheckoutSettings checkoutSettings = createCheckoutSettings(checkoutId);
     checkoutSettings.setLocale(languageCode);
+    checkoutSettings.setStorePaymentDetailsMode(CheckoutStorePaymentDetailsMode.NEVER);
     Intent intent = checkoutSettings.createCheckoutActivityIntent(registrar.activity());
     registrar.activity().startActivityForResult(intent, CheckoutActivity.REQUEST_CODE_CHECKOUT);
   }

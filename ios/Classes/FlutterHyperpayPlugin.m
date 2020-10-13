@@ -15,12 +15,14 @@
   }
   else if ([call.method isEqualToString:@"checkoutActivity"]) {
     self->checkoutID = call.arguments[@"checkoutID"];
-    self->callbackURL = call.arguments[@"callbackURL"];
-    self->languageCode = call.arguments[@"languageCode"];
+    self->callbackURL = call.arguments[@"callbackIos"];
+    self->languageCode = call.arguments[@"languageCodeIos"];
     self->provider = [OPPPaymentProvider paymentProviderWithMode:OPPProviderModeTest];
     OPPCheckoutSettings *checkoutSettings = [[OPPCheckoutSettings alloc] init];
     checkoutSettings.paymentBrands = @[@"VISA", @"MASTER"];
     checkoutSettings.shopperResultURL = self->callbackURL;
+    checkoutSettings.displayTotalAmount = YES;
+    checkoutSettings.storePaymentDetails = OPPCheckoutStorePaymentDetailsModeNever;
     self->checkoutProvider = [OPPCheckoutProvider checkoutProviderWithPaymentProvider:provider checkoutID:checkoutID settings:checkoutSettings];
     [checkoutProvider presentCheckoutForSubmittingTransactionCompletionHandler:^(OPPTransaction * _Nullable transaction, NSError * _Nullable error) {
         if (error) {
@@ -29,7 +31,7 @@
         } else if (transaction.type == OPPTransactionTypeSynchronous)  {
             // Send request to your server to obtain the status of the synchronous transaction
             // You can use transaction.resourcePath or just checkout id to do it
-            result(@"HY_SYNC_COMPLETED");
+            result(@"HP_SYNC_COMPLETED");
         } else {
             // The SDK opens transaction.redirectUrl in a browser
             // See 'Asynchronous Payments' guide for more details
