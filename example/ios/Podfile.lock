@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_hyperpay (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_hyperpay (from `.symlinks/plugins/flutter_hyperpay/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_hyperpay:
+    :path: ".symlinks/plugins/flutter_hyperpay/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_hyperpay: f6f41da03b372f9fc304204ca9254a5110740210
+
+PODFILE CHECKSUM: b1f7a399522c118a74b177b13c01eca692aa7e6d
+
+COCOAPODS: 1.9.3
