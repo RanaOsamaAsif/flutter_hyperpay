@@ -152,7 +152,7 @@ public class FlutterHyperpayPlugin implements MethodCallHandler, PluginRegistry.
   private void openCheckoutUI(String checkoutId, String languageCode) {
     CheckoutSettings checkoutSettings = createCheckoutSettings(checkoutId);
     checkoutSettings.setLocale(languageCode);
-    checkoutSettings.setStorePaymentDetailsMode(CheckoutStorePaymentDetailsMode.NEVER);
+    checkoutSettings.setTotalAmountRequired(true);
     Intent intent = checkoutSettings.createCheckoutActivityIntent(registrar.activity());
     registrar.activity().startActivityForResult(intent, CheckoutActivity.REQUEST_CODE_CHECKOUT);
   }
