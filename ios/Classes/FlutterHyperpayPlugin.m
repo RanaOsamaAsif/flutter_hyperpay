@@ -30,7 +30,6 @@
     checkoutSettings.theme.sectionBackgroundColor = [UIColor colorWithRed: 0.93 green: 0.82 blue: 0.85 alpha: 1.00];
     checkoutSettings.theme.primaryForegroundColor = [UIColor whiteColor];
     checkoutSettings.theme.confirmationButtonTextColor = [UIColor whiteColor];
-    checkoutSettings.theme.activityIndicatorStyle = [UIColor lightGrayColor];
     checkoutSettings.theme.confirmationButtonColor = [UIColor colorWithRed: 0.55 green: 0.22 blue: 0.31 alpha: 1.00];
     self->checkoutProvider = [OPPCheckoutProvider checkoutProviderWithPaymentProvider:provider checkoutID:checkoutID settings:checkoutSettings];
     [checkoutProvider presentCheckoutForSubmittingTransactionCompletionHandler:^(OPPTransaction * _Nullable transaction, NSError * _Nullable error) {

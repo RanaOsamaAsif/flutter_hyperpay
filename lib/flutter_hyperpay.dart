@@ -11,20 +11,26 @@ class FlutterHyperpay {
   }
 
   static Future<String> checkoutActitvity(
-      {String checkoutID, String languageCodeIos, String languageCodeAndroid, String callbackURL}) async {
-    final String version = await _channel.invokeMethod('checkoutActivity', {
-      "checkoutID": checkoutID,
-      "languageCodeIos": languageCodeIos,
-      "languageCodeAndroid": languageCodeAndroid,
-      "callbackURL": callbackURL,
-      "callbackIos": "$callbackURL://result"
-    });
-    return version;
+      {String checkoutID,
+      String languageCodeIos,
+      String languageCodeAndroid,
+      String callbackURL}) async {
+    try {
+      final String version = await _channel.invokeMethod('checkoutActivity', {
+        "checkoutID": checkoutID,
+        "languageCodeIos": languageCodeIos,
+        "languageCodeAndroid": languageCodeAndroid,
+        "callbackURL": callbackURL,
+        "callbackIos": "$callbackURL://result"
+      });
+      return version;
+    } on PlatformException catch (e) {
+      return e.code;
+    }
   }
 
   static Future<String> closeCheckout() async {
-    final String version = await _channel
-        .invokeMethod('closeCheckout');
+    final String version = await _channel.invokeMethod('closeCheckout');
     return version;
   }
 }
