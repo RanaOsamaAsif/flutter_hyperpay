@@ -2,9 +2,9 @@
 <resources>
     <color name="colorPrimary">#424242</color>
     <color name="colorPrimaryDark">@android:color/black</color>
-    <color name="colorAccent">#8c3850</color>
+    <color name="colorAccent">#38689d</color>
 
     <!-- override the colors for checkout theme -->
     <color name="checkout_color_accent">@color/colorAccent</color>
-    <color name="checkout_section_background_color_light">#edd2d9</color>
+    <color name="checkout_section_background_color_light">#66b2ff</color>
 </resources>
